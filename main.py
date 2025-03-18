@@ -1,12 +1,18 @@
 import tkinter as tk
 from tkinter import ttk
-
+from ui.home import HomePage
+from ui.f1 import F1
+from ui.nfl import NFL
+from ui.nba import NBA
+from ui.nhl import NHL
+from ui.mlb import MLB
+from ui.college import College
 
 class windows(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__()
         self.wm_title("My Sports")
-        self.geometry("600x400")
+        self.geometry("800x400")
 
         self.container = ttk.Frame(self)
         self.container.grid(row=1, column=0, sticky="nsew")
@@ -51,55 +57,6 @@ class windows(tk.Tk):
 
         college_button = ttk.Button(self.navbar, text='College', command=lambda: self.show_frame(College))
         college_button.grid(row=0, column=6)
-
-
-class HomePage(tk.Frame):
-    def __init__(self, parent, controller):
-        super().__init__(parent)
-        label = tk.Label(self, text="Home Page")
-        label.grid(row=0, column=0)
-
-
-class F1(tk.Frame):
-    def __init__(self, parent, controller):
-        super().__init__(parent)
-        label = tk.Label(self, text="F1 Page")
-        label.grid(row=0, column=0)
-
-        
-class NFL(tk.Frame):
-    def __init__(self, parent, controller):
-        super().__init__(parent)
-        label = tk.Label(self, text="NFL Page")
-        label.grid(row=0, column=0)
-
-
-class NBA(tk.Frame):
-    def __init__(self, parent, controller):
-        super().__init__(parent)
-        label = tk.Label(self, text="NBA Page")
-        label.grid(row=0, column=0)
-
-
-class NHL(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="NHL Page")
-        label.grid(row=0, column=0)
-
-
-class MLB(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="MLB Page")
-        label.grid(row=0, column=0)
-
-
-class College(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="College Page")
-        label.grid(row=0, column=0)
 
 
 if __name__ == "__main__":
