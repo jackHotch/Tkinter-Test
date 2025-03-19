@@ -12,7 +12,7 @@ class windows(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__()
         self.wm_title("My Sports")
-        self.geometry("800x400")
+        self.geometry("600x400")  # Set full window size
 
         self.container = ttk.Frame(self)
         self.container.grid(row=1, column=0, sticky="nsew")
@@ -37,28 +37,24 @@ class windows(tk.Tk):
         frame.tkraise()
 
     def create_navbar(self):
-        home_button = ttk.Button(self.navbar, text='Home', command=lambda: self.show_frame(HomePage))
-        home_button.grid(row=0, column=0)
+        buttons = [
+            ("Home", HomePage),
+            ("F1", F1),
+            ("NFL", NFL),
+            ("NBA", NBA),
+            ("NHL", NHL),
+            ("MLB", MLB),
+            ("College", College)
+        ]
+        for i, (label, page) in enumerate(buttons):
+            button = ttk.Button(self.navbar, text=label, command=lambda p=page: self.show_frame(p))
+            button.grid(row=0, column=i)
 
-        f1_button = ttk.Button(self.navbar, text='F1', command=lambda: self.show_frame(F1))
-        f1_button.grid(row=0, column=1)
+        # Allow navbar to expand horizontally
+        self.navbar.grid_columnconfigure(len(buttons) - 1, weight=1)
 
-        nfl_button = ttk.Button(self.navbar, text='NFL', command=lambda: self.show_frame(NFL))
-        nfl_button.grid(row=0, column=2)
-
-        nba_button = ttk.Button(self.navbar, text='NBA', command=lambda: self.show_frame(NBA))
-        nba_button.grid(row=0, column=3)
-
-        nhl_button = ttk.Button(self.navbar, text='NHL', command=lambda: self.show_frame(NHL))
-        nhl_button.grid(row=0, column=4)
-
-        mlb_button = ttk.Button(self.navbar, text='MLB', command=lambda: self.show_frame(MLB))
-        mlb_button.grid(row=0, column=5)
-
-        college_button = ttk.Button(self.navbar, text='College', command=lambda: self.show_frame(College))
-        college_button.grid(row=0, column=6)
-
-
+# Start the app
 if __name__ == "__main__":
     root = windows()
+    # root.state('zoomed')  # Maximize window
     root.mainloop()

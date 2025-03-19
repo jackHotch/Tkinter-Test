@@ -1,5 +1,5 @@
 import requests
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 def format_month(month):
   match month:
@@ -34,15 +34,20 @@ def format_date(date):
   return f'{month} {day}'
 
 def format_time(time):
-  time = time[0:5]
-  return time
+  utc_time = datetime.strptime(time, '%H:%M:%SZ').replace(tzinfo=timezone.utc)
+
+  # Convert to Eastern Standard Time (UTC-5)
+  est_time = utc_time.astimezone(timezone(timedelta(hours=-4)))
+
+  # Format to 12-hour time
+  formatted_time = est_time.strftime('%I:%M %p')
+  return formatted_time
 
 def fetch_next_race():
   response = requests.get('https://api.jolpi.ca/ergast/f1/current/next/races')
   if response.status_code == 200:
     data = response.json()
     race = data['MRData']['RaceTable']['Races'][0]
-    print('Sprint' in race)
 
     if 'Sprint' in race:
       raceInfo = {
